@@ -1,27 +1,19 @@
-/*
-#include <stdio.h>
-#include "MathObjects/vector.h"
-#include "RenderObjects/objects.h"
-
-int main()
-{
-    Sphere s = Sphere(0, 0, 0, 5);
-    BaseObjectInterface *item = &s;
-    double dist = item->getDist(5, 0, 0);
-    printf("Dist: %f", dist);
-    return 0;
-}
-*/
-
 #include "RenderObjects/renderController.h"
 
 int main()
 {
-    Camera camera = Camera();
-    RenderConfig config;
-    config.WinWidth = 500;
-    config.WinHeight = 500;
-    RenderController controller = RenderController(camera, config);
+    CameraConfig cameraConfig;
+    cameraConfig.resolutionX = 100;
+    cameraConfig.resolutionY = 100;
+    cameraConfig.ViewingAngleX = 3.14;
+    cameraConfig.ViewingAngleY = 3.14;
+
+    RenderConfig renderConfig;
+    renderConfig.WinWidth = 500;
+    renderConfig.WinHeight = 500;
+
+    Camera camera = Camera(Vector(0, 0, 0), Vector(0, 0, 0), cameraConfig);
+    RenderController controller = RenderController(camera, renderConfig);
     controller.run();
     return 0;
 }

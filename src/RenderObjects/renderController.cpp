@@ -5,6 +5,7 @@ Camera::Camera(Vector position, Vector angls, CameraConfig conf)
 {
     this->position = position;
     this->angles = angls;
+    this->config = conf;
 };
 
 void Camera::rotate(Vector rotationAngles)
@@ -32,11 +33,30 @@ void RenderController::setObject(BaseObjectInterface &obj){
     objects.push_front(&obj);
 }
 
+Vector RenderController::rayMarching(Ray ray)
+{
+    return Vector(0, 0, 0);
+}
+
+Ray RenderController::rayMarchingStep(Ray ray)
+{
+
+}
+
 void RenderController::run()
 {
     sf::RenderWindow window(sf::VideoMode(config.WinWidth, config.WinHeight), "Render!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    sf::RectangleShape figure(sf::Vector2f(120, 50));
+    figure.setPosition(250.f, 250.f);
+    figure.setFillColor(sf::Color::Green);
+
+    for(int i=0; i<camera.config.resolutionX; i++)
+    {
+        for(int i=0; i<camera.config.resolutionY; i++)
+        {
+
+        }
+    }
 
     while (window.isOpen())
     {
@@ -48,7 +68,7 @@ void RenderController::run()
         }
 
         window.clear();
-        window.draw(shape);
+        window.draw(figure);
         window.display();
     }
 };

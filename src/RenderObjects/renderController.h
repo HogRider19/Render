@@ -10,6 +10,8 @@ struct CameraConfig
 {
     int resolutionX;
     int resolutionY;
+    double ViewingAngleX;
+    double ViewingAngleY;
 };
 
 struct RenderConfig
@@ -24,6 +26,7 @@ class Camera
 public:
     Vector position;
     Vector angles;
+    CameraConfig config;
 
     Camera(){};
     Camera(Vector position, Vector angles, CameraConfig conf);
@@ -48,4 +51,10 @@ public:
     void setObject(BaseObjectInterface &obj);
 
     void run();
+
+private:
+
+    Vector rayMarching(Ray ray);
+
+    Ray rayMarchingStep(Ray ray);
 };
