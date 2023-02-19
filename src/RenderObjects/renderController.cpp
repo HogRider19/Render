@@ -50,11 +50,15 @@ void RenderController::run()
     figure.setPosition(250.f, 250.f);
     figure.setFillColor(sf::Color::Green);
 
-    for(int i=0; i<camera.config.resolutionX; i++)
+    CameraConfig cnf = camera.config;
+    double pixelSizeX = cnf.ViewingAngleX / cnf.resolutionX;
+    double pixelSizeY = cnf.ViewingAngleY / cnf.resolutionY;
+    for(double i=-cnf.ViewingAngleX/2; i<cnf.ViewingAngleX/2; i = i + pixelSizeX)
     {
-        for(int i=0; i<camera.config.resolutionY; i++)
+        for(double j=-cnf.ViewingAngleY/2; j<cnf.ViewingAngleY/2; j = j + pixelSizeY)
         {
-
+            //printf("i = %f\n", i);
+            //printf("j = %f\n", j);
         }
     }
 
@@ -70,5 +74,7 @@ void RenderController::run()
         window.clear();
         window.draw(figure);
         window.display();
+
+        return;
     }
 };
