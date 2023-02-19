@@ -40,7 +40,7 @@ Vector RenderController::rayMarching(Ray ray)
 
 Ray RenderController::rayMarchingStep(Ray ray)
 {
-
+    return Ray(Vector(), Vector());
 }
 
 void RenderController::run()

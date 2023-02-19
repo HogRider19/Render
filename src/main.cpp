@@ -9,8 +9,8 @@ int main()
     cameraConfig.ViewingAngleY = 3.14;
 
     RenderConfig renderConfig;
-    renderConfig.WinWidth = 500;
-    renderConfig.WinHeight = 500;
+    renderConfig.WinWidth = 800;
+    renderConfig.WinHeight = 800;
 
     Camera camera = Camera(Vector(0, 0, 0), Vector(0, 0, 0), cameraConfig);
     RenderController controller = RenderController(camera, renderConfig);
