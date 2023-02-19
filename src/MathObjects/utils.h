@@ -1,5 +1,4 @@
 #pragma once
-#include <stdio.h>
 #include "line.h"
 #include "vector.h"
 
