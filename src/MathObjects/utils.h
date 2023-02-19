@@ -3,5 +3,5 @@
 #include "vector.h"
 
 
-float distLineToPoint(Line line, float x, float y, float z);
-float distLineToPoint(Line line, Vector point);
+double distLineToPoint(Line line, double x, double y, double z);
+double distLineToPoint(Line line, Vector point);

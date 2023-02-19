@@ -6,25 +6,23 @@ class Vector
 {
 
 public:
-    float x;
-    float y;
-    float z;
-
+    double x, y, z = 0;
+    
     Vector(){};
-    Vector(float x, float y, float z);
+    Vector(double x, double y, double z);
 
-    float lenght(); // Вернуть длину 
+    double lenght(); // Вернуть длину 
 
     Vector sub(Vector other); // прибавить вектор
 
-    void rotate(float dx, float dy, float dz); // повернуть на углы dx dy dz
+    void rotate(double dx, double dy, double dz); // повернуть на углы dx dy dz
 
-    void rotateAxis(float d, int axis); // axis=0 повернуть относитьельно dx, axis=1 пов.отн dy итд
+    void rotateAxis(double d, int axis); // axis=0 повернуть относитьельно dx, axis=1 пов.отн dy итд
 
-    float getAngle(int axis); // вернуть угол в радианах относительно оси axis
+    double getAngle(int axis); // вернуть угол в радианах относительно оси axis
 
     void normilaze(); // нормализовать
 
-    void mult(float n); // умножить на n 
+    void mult(double n); // умножить на n 
 };
 
