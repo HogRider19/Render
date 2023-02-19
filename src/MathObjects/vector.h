@@ -13,7 +13,9 @@ public:
 
     double lenght(); // Вернуть длину 
 
-    Vector sub(Vector other); // прибавить вектор
+    void sub(Vector other); // прибавить вектор к текущему
+
+    Vector subNew(Vector other); // вернкть сумму векторов
 
     void rotate(double dx, double dy, double dz); // повернуть на углы dx dy dz
 

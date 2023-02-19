@@ -25,7 +25,7 @@ double Sphere::getDist(double pX, double pY, double pZ)
 };
 
 
-double Sphere::getColor(Ray ray)
+Vector Sphere::getColor(Ray ray)
 {
-    return 0.0;
+    return Vector(0, 0, 1);
 };

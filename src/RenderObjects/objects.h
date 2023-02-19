@@ -9,7 +9,7 @@ class BaseObjectInterface
 {
 public:
     virtual double getDist(double pX, double pY, double pZ) = 0;
-    virtual double getColor(Ray ray) = 0;
+    virtual Vector getColor(Ray ray) = 0;
 };
 
 
@@ -25,6 +25,6 @@ public:
 
     virtual double getDist(double pX, double pY, double pZ) override;
 
-    virtual double getColor(Ray ray) override;
+    virtual Vector getColor(Ray ray) override;
 };
 
