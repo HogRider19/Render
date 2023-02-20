@@ -3,6 +3,6 @@
 
 Ray::Ray(Vector point, Vector direct)
 {
-    this->direct = direct;
+    this->direction = direct;
     this->position = point;
 }

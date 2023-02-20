@@ -15,5 +15,6 @@ int main()
     Camera camera = Camera(Vector(0, 0, 0), Vector(0, 0, 0), cameraConfig);
     RenderController controller = RenderController(camera, renderConfig);
     controller.run();
+
     return 0;
 }

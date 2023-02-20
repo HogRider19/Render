@@ -48,7 +48,7 @@ public:
 
     RenderController(Camera camera, RenderConfig conf);
 
-    void setObject(BaseObjectInterface &obj);
+    void addObject(BaseObjectInterface &obj);
 
     void run();
 

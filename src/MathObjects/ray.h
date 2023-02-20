@@ -7,11 +7,9 @@ class Ray
 public:
 
     Vector position;
-    Vector direct;
+    Vector direction;
 
     Ray(Vector position, Vector direct);
-
-    Vector getGuidingVector(); // Вернуть направляющий вектор
 
     void rotate(double dx, double dy, double dz); // повернуть на углы dx dy dz
 

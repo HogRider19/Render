@@ -21,6 +21,11 @@ Vector Vector::subNew(Vector other)
 void Vector::rotate(double dx, double dy, double dz)
 {
 
+};
+
+double Vector::lenght()
+{
+    return sqrt(x * x + y * y + z * z);
 }
 
 

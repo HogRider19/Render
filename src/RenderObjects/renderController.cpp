@@ -29,7 +29,7 @@ RenderController::RenderController(Camera camera, RenderConfig conf)
     this->config = conf;
 };
 
-void RenderController::setObject(BaseObjectInterface &obj){
+void RenderController::addObject(BaseObjectInterface &obj){
     objects.push_front(&obj);
 }
 
