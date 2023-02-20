@@ -17,6 +17,8 @@ set(SOURCES
     src/MathObjects/vector.cpp
     src/MathObjects/ray.h
     src/MathObjects/ray.cpp
+    src/MathObjects/utils.h
+    src/MathObjects/utils.cpp
     src/RenderObjects/objects.h
     src/RenderObjects/objects.cpp
     src/RenderObjects/renderController.h
