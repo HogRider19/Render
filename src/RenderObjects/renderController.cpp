@@ -1,16 +1,16 @@
 #include "renderController.h"
 
 
-Camera::Camera(Vector position, Vector angls, CameraConfig conf)
+Camera::Camera(Vector position, Vector direction, CameraConfig conf)
 {
     this->position = position;
-    this->angles = angls;
+    this->direction = direction;
     this->config = conf;
 };
 
 void Camera::rotate(Vector rotationAngles)
 {
-    angles.rotate(rotationAngles.x, rotationAngles.y, rotationAngles.x);
+    direction.rotate(rotationAngles.x, rotationAngles.y, rotationAngles.x);
 }
 
 void Camera::move(Vector newPosition)
@@ -20,7 +20,7 @@ void Camera::move(Vector newPosition)
 
 void Camera::moveTo(Vector newPosition)
 {
-    this->position = newPosition;
+    position = newPosition;
 };
 
 RenderController::RenderController(Camera camera, RenderConfig conf)
@@ -43,6 +43,22 @@ Ray RenderController::rayMarchingStep(Ray ray)
     return Ray(Vector(), Vector());
 }
 
+void RenderController::frameRender(sf::RenderWindow& window)
+{   
+    CameraConfig cnf = camera.config;
+    Ray cmaeraDirection = Ray(camera.position, camera.direction);
+    double pixelSizeX = cnf.ViewingAngleX / cnf.resolutionX;
+    double pixelSizeY = cnf.ViewingAngleY / cnf.resolutionY;
+    for(double i=-cnf.ViewingAngleX/2; i<cnf.ViewingAngleX/2; i = i + pixelSizeX)
+    {
+        for(double j=-cnf.ViewingAngleY/2; j<cnf.ViewingAngleY/2; j = j + pixelSizeY)
+        {
+            printf("i = %f ", i);
+            printf("j = %f\n", j);
+        }
+    }
+}
+
 void RenderController::run()
 {
     sf::RenderWindow window(sf::VideoMode(config.WinWidth, config.WinHeight), "Render!");
@@ -50,17 +66,7 @@ void RenderController::run()
     figure.setPosition(250.f, 250.f);
     figure.setFillColor(sf::Color::Green);
 
-    CameraConfig cnf = camera.config;
-    double pixelSizeX = cnf.ViewingAngleX / cnf.resolutionX;
-    double pixelSizeY = cnf.ViewingAngleY / cnf.resolutionY;
-    for(double i=-cnf.ViewingAngleX/2; i<cnf.ViewingAngleX/2; i = i + pixelSizeX)
-    {
-        for(double j=-cnf.ViewingAngleY/2; j<cnf.ViewingAngleY/2; j = j + pixelSizeY)
-        {
-            //printf("i = %f\n", i);
-            //printf("j = %f\n", j);
-        }
-    }
+    frameRender(window);
 
     while (window.isOpen())
     {
@@ -74,7 +80,5 @@ void RenderController::run()
         window.clear();
         window.draw(figure);
         window.display();
-
-        return;
     }
 };

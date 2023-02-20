@@ -25,11 +25,11 @@ class Camera
 {
 public:
     Vector position;
-    Vector angles;
+    Vector direction;
     CameraConfig config;
 
     Camera(){};
-    Camera(Vector position, Vector angles, CameraConfig conf);
+    Camera(Vector position, Vector direction, CameraConfig conf);
 
     void move(Vector delta);
 
@@ -53,6 +53,8 @@ public:
     void run();
 
 private:
+
+    void frameRender(sf::RenderWindow& window);
 
     Vector rayMarching(Ray ray);
 

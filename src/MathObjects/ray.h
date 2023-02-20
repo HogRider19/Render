@@ -9,7 +9,7 @@ public:
     Vector position;
     Vector direct;
 
-    Ray(Vector point, Vector direct);
+    Ray(Vector position, Vector direct);
 
     Vector getGuidingVector(); // Вернуть направляющий вектор
 
