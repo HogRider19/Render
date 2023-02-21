@@ -5,8 +5,9 @@ int main()
     CameraConfig cameraConfig;
     cameraConfig.resolutionX = 100;
     cameraConfig.resolutionY = 100;
-    cameraConfig.ViewingAngleX = 3.14;
-    cameraConfig.ViewingAngleY = 3.14;
+    cameraConfig.viewingAngleX = 3.14;
+    cameraConfig.viewingAngleY = 3.14;
+    cameraConfig.projectionPlaneDistance = 1.0;
 
     RenderConfig renderConfig;
     renderConfig.WinWidth = 800;

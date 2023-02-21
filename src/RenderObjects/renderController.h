@@ -3,6 +3,7 @@
 #include <list>
 #include <SFML/Graphics.hpp>
 #include "objects.h"
+#include "../MathObjects/utils.h"
 #include "math.h"
 
 
@@ -10,8 +11,9 @@ struct CameraConfig
 {
     int resolutionX;
     int resolutionY;
-    double ViewingAngleX;
-    double ViewingAngleY;
+    double viewingAngleX;
+    double viewingAngleY;
+    double projectionPlaneDistance;
 };
 
 struct RenderConfig

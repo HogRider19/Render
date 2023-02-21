@@ -12,4 +12,4 @@
     переданной точки (x, y) в трехмерном пространстве в виде вектора 
 */
 
-Vector convertPlaneСoordToGlobal(double x, double y, Vector planeNormal, Vector planePoint);
+Vector convertPlaneCoordToGlobal(double x, double y, Vector planeNormal, Vector planePoint);

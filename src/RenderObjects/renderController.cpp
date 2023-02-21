@@ -47,14 +47,17 @@ void RenderController::frameRender(sf::RenderWindow& window)
 {   
     CameraConfig cnf = camera.config;
     Ray cmaeraDirection = Ray(camera.position, camera.direction);
-    double pixelSizeX = cnf.ViewingAngleX / cnf.resolutionX;
-    double pixelSizeY = cnf.ViewingAngleY / cnf.resolutionY;
-    for(double i=-cnf.ViewingAngleX/2; i<cnf.ViewingAngleX/2; i = i + pixelSizeX)
+
+    double planeLengthX = 2 * cnf.projectionPlaneDistance * sin(cnf.viewingAngleX / 2);
+    double planeLengthY = 2 * cnf.projectionPlaneDistance * sin(cnf.viewingAngleY / 2);
+    double pixelSizeX = planeLengthX / cnf.resolutionX;
+    double pixelSizeY = planeLengthY / cnf.resolutionY;
+    for(double x=-planeLengthX/2; x<planeLengthX/2; x = x + pixelSizeX)
     {
-        for(double j=-cnf.ViewingAngleY/2; j<cnf.ViewingAngleY/2; j = j + pixelSizeY)
+        for(double y=-planeLengthY/2; y<planeLengthY/2; y = y + pixelSizeY)
         {
-            printf("i = %f ", i);
-            printf("j = %f\n", j);
+            printf("x = %f ", x);
+            printf("y = %f\n", y);
         }
     }
 }
