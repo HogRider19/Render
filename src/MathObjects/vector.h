@@ -27,5 +27,7 @@ public:
     void normilaze(); // нормализовать
 
     void mult(double n); // умножить на n 
+
+    Vector multNew(double n); // вернуть результат умножения на n 
 };
 

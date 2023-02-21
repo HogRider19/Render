@@ -52,12 +52,16 @@ void RenderController::frameRender(sf::RenderWindow& window)
     double planeLengthY = 2 * cnf.projectionPlaneDistance * sin(cnf.viewingAngleY / 2);
     double pixelSizeX = planeLengthX / cnf.resolutionX;
     double pixelSizeY = planeLengthY / cnf.resolutionY;
+    Vector planePoint = camera.position.subNew(camera.direction);
     for(double x=-planeLengthX/2; x<planeLengthX/2; x = x + pixelSizeX)
     {
         for(double y=-planeLengthY/2; y<planeLengthY/2; y = y + pixelSizeY)
         {
-            printf("x = %f ", x);
-            printf("y = %f\n", y);
+            Vector point = convertPlaneCoordToGlobal(x, y, camera.direction, planePoint);
+            Vector renderRayDirection = camera.position.subNew(point.multNew(-1));
+            Ray renderRay = Ray(camera.position, renderRayDirection);
+
+            ///
         }
     }
 }
