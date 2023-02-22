@@ -35,11 +35,25 @@ void RenderController::addObject(BaseObjectInterface &obj){
 
 Vector RenderController::rayMarching(Ray ray)
 {
+    double minDist = 0;
+    double nearestObject;
+    for (auto iter = next(objects.begin(), objects.size()); iter != objects.end(); iter++)
+    {
+        
+    }
+
     return Vector(0, 0, 0);
 }
 
 Ray RenderController::rayMarchingStep(Ray ray)
 {
+    double minimalDist = 0;
+    for (auto object = next(objects.begin(), objects.size()); object != objects.end(); object++)
+    {
+        Vector point = ray.position;
+        double dist = object->getDist(point.x, point.y, point.z); // Исправить
+    }
+
     return Ray(Vector(), Vector());
 }
 
