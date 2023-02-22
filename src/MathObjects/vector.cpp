@@ -28,4 +28,14 @@ double Vector::lenght()
     return sqrt(x * x + y * y + z * z);
 }
 
+void Vector::mult(double n)
+{
+    
+} 
+
+Vector Vector::multNew(double n)
+{
+    return Vector(0, 0, 0);
+}
+
 

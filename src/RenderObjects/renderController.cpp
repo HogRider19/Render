@@ -45,6 +45,7 @@ Ray RenderController::rayMarchingStep(Ray ray)
 
 void RenderController::frameRender(sf::RenderWindow& window)
 {   
+    window.clear();
     CameraConfig cnf = camera.config;
     Ray cmaeraDirection = Ray(camera.position, camera.direction);
 
@@ -61,31 +62,36 @@ void RenderController::frameRender(sf::RenderWindow& window)
             Vector renderRayDirection = camera.position.subNew(point.multNew(-1));
             Ray renderRay = Ray(camera.position, renderRayDirection);
 
-            ///
+            Vector pixelCollor = rayMarching(renderRay);
+            pixelCollor.mult(255);
+
+            sf::RectangleShape pixel (sf::Vector2f(pixelSizeX, pixelSizeY));
+            pixel.setFillColor(sf::Color(pixelCollor.x, pixelCollor.y, pixelCollor.z));
+            pixel.setPosition(x, y);
+
+            window.draw(pixel);
         }
+    }
+}
+
+void RenderController::handleEvents(sf::RenderWindow& window)
+{
+    sf::Event event;
+    while (window.pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+            window.close();
     }
 }
 
 void RenderController::run()
 {
     sf::RenderWindow window(sf::VideoMode(config.WinWidth, config.WinHeight), "Render!");
-    sf::RectangleShape figure(sf::Vector2f(120, 50));
-    figure.setPosition(250.f, 250.f);
-    figure.setFillColor(sf::Color::Green);
-
-    frameRender(window);
 
     while (window.isOpen())
     {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        window.clear();
-        window.draw(figure);
+        frameRender(window);
+        handleEvents(window);
         window.display();
     }
 };

@@ -26,7 +26,7 @@ double Sphere::getDist(double pX, double pY, double pZ)
     return distanceToSphereSurface;
 };
 
-Vector Sphere::getColor(Ray ray)
+Vector Sphere::getColor(double pX, double pY, double pZ)
 {
     return Vector(0, 0, 1);
 };
@@ -56,7 +56,7 @@ double Plane::getDist(double pX, double pY, double pZ)
     return distanceToPlane;
 };
 
-Vector Plane::getColor(Ray ray)
+Vector Plane::getColor(double pX, double pY, double pZ)
 {
     return Vector(0.5, 0.5, 0.5);
 };

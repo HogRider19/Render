@@ -58,6 +58,8 @@ private:
 
     void frameRender(sf::RenderWindow& window);
 
+    void handleEvents(sf::RenderWindow& window);
+
     Vector rayMarching(Ray ray);
 
     Ray rayMarchingStep(Ray ray);
