@@ -47,14 +47,19 @@ Vector RenderController::rayMarching(Ray ray)
 
 Ray RenderController::rayMarchingStep(Ray ray)
 {
-    double minimalDist = 0;
-    for (auto object = next(objects.begin(), objects.size()); object != objects.end(); object++)
+    double minimalDist = std::numeric_limits<double>::max();
+    std::for_each(objects.begin(), objects.end(), [ray, &minimalDist](BaseObjectInterface* object) 
     {
         Vector point = ray.position;
-        double dist = object->getDist(point.x, point.y, point.z); // Исправить
-    }
-
-    return Ray(Vector(), Vector());
+        double dist = object->getDist(point.x, point.y, point.z);
+        if (dist < minimalDist)
+            minimalDist = dist;
+    });
+    
+    ray.direction.normilaze();
+    Vector displace = ray.direction.multNew(minimalDist);
+    Vector newPosition = ray.position.subNew(displace);
+    return Ray(newPosition, ray.direction);
 }
 
 void RenderController::frameRender(sf::RenderWindow& window)
