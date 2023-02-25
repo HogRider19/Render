@@ -35,13 +35,6 @@ void RenderController::addObject(BaseObjectInterface &obj){
 
 Vector RenderController::rayMarching(Ray ray)
 {
-    double minDist = 0;
-    double nearestObject;
-    for (auto iter = next(objects.begin(), objects.size()); iter != objects.end(); iter++)
-    {
-        
-    }
-
     return Vector(0, 0, 0);
 }
 
