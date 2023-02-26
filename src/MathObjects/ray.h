@@ -9,6 +9,7 @@ public:
     Vector position;
     Vector direction;
 
+    Ray(){};
     Ray(Vector position, Vector direct);
 
     void rotate(double dx, double dy, double dz); // повернуть на углы dx dy dz

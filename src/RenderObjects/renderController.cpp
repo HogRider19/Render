@@ -34,25 +34,40 @@ void RenderController::addObject(BaseObjectInterface &obj){
 }
 
 Vector RenderController::rayMarching(Ray ray)
-{
+{ 
     return Vector(0, 0, 0);
 }
 
-Ray RenderController::rayMarchingStep(Ray ray)
+RayMarchingStepResult RenderController::rayMarchingStep(Ray ray)
 {
     double minimalDist = std::numeric_limits<double>::max();
-    std::for_each(objects.begin(), objects.end(), [ray, &minimalDist](BaseObjectInterface* object) 
+    int nearestObjectIndex = 0;
+    int index = 0;
+
+    std::for_each(objects.begin(), objects.end(),
+    [ray, &minimalDist, &nearestObjectIndex, &index](BaseObjectInterface* object) 
     {
         Vector point = ray.position;
         double dist = object->getDist(point.x, point.y, point.z);
         if (dist < minimalDist)
+        {
+            nearestObjectIndex = index;
             minimalDist = dist;
+        }
+        index++;
     });
     
     ray.direction.normilaze();
     Vector displace = ray.direction.multNew(minimalDist);
     Vector newPosition = ray.position.subNew(displace);
-    return Ray(newPosition, ray.direction);
+    Ray rayMarchingRay = Ray(newPosition, ray.direction);
+
+    RayMarchingStepResult result;
+    result.rayMarchingRay = rayMarchingRay;
+    result.minimalDist = minimalDist;
+    result.nearestObjectIndex = nearestObjectIndex;
+    
+    return result;
 }
 
 void RenderController::frameRender(sf::RenderWindow& window)

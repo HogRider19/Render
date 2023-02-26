@@ -22,6 +22,12 @@ struct RenderConfig
     int WinHeight;
 };
 
+struct RayMarchingStepResult
+{
+    Ray rayMarchingRay;
+    double minimalDist;
+    int nearestObjectIndex;
+};
 
 class Camera
 {
@@ -62,5 +68,5 @@ private:
 
     Vector rayMarching(Ray ray);
 
-    Ray rayMarchingStep(Ray ray);
+    RayMarchingStepResult rayMarchingStep(Ray ray);
 };
