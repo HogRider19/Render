@@ -20,6 +20,9 @@ struct RenderConfig
 {
     int WinWidth;
     int WinHeight;
+    int maxIterationRayMarch;
+    double displayAccuracy;
+    double visibilityRange;
 };
 
 struct RayMarchingStepResult

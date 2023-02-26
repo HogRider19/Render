@@ -29,12 +29,35 @@ RenderController::RenderController(Camera camera, RenderConfig conf)
     this->config = conf;
 };
 
-void RenderController::addObject(BaseObjectInterface &obj){
+void RenderController::addObject(BaseObjectInterface &obj)
+{
     objects.push_front(&obj);
 }
 
 Vector RenderController::rayMarching(Ray ray)
 { 
+
+    Ray rayMarchingRay = ray;
+    double minimalDist = std::numeric_limits<double>::max();
+    int nearestObjectindex = 0;
+
+    for(int stepCount=0; stepCount<config.maxIterationRayMarch; stepCount++)
+    {
+        RayMarchingStepResult res = rayMarchingStep(rayMarchingRay);
+        rayMarchingRay = res.rayMarchingRay;
+        minimalDist = res.minimalDist;
+        nearestObjectindex = res.nearestObjectIndex;
+
+        if(minimalDist < config.displayAccuracy)
+        {
+            std::list<BaseObjectInterface*>::iterator it = objects.begin();
+            std::advance(it, nearestObjectindex);
+            BaseObjectInterface* crossObject = *it;
+
+            Vector cressPoint = rayMarchingRay.position;
+            return crossObject->getColor(cressPoint.x, cressPoint.y, cressPoint.z);
+        }
+    }
     return Vector(0, 0, 0);
 }
 
@@ -66,7 +89,7 @@ RayMarchingStepResult RenderController::rayMarchingStep(Ray ray)
     result.rayMarchingRay = rayMarchingRay;
     result.minimalDist = minimalDist;
     result.nearestObjectIndex = nearestObjectIndex;
-    
+
     return result;
 }
 

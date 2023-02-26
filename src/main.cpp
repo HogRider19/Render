@@ -12,6 +12,9 @@ int main()
     RenderConfig renderConfig;
     renderConfig.WinWidth = 800;
     renderConfig.WinHeight = 800;
+    renderConfig.maxIterationRayMarch = 30;
+    renderConfig.displayAccuracy = 0.1;
+    renderConfig.visibilityRange = 30.0;
 
     Camera camera = Camera(Vector(0, 0, 0), Vector(0, 0, 0), cameraConfig);
     RenderController controller = RenderController(camera, renderConfig);
