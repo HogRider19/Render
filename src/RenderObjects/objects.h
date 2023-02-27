@@ -44,3 +44,18 @@ public:
     virtual Vector getColor(double pX, double pY, double pZ) override;
 };
 
+
+class Torus : public BaseObjectInterface
+{
+public:
+
+    double x, y, z;
+    double radiusSamll, radiusLarge;
+
+    Torus(Vector position, double radiusSamll, double radiusLarge);
+    Torus(double x, double y, double z, double radiusSamll, double radiusLarge);
+
+    virtual double getDist(double pX, double pY, double pZ) override;
+
+    virtual Vector getColor(double pX, double pY, double pZ) override;
+};

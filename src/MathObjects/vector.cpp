@@ -38,4 +38,9 @@ Vector Vector::multNew(double n)
     return Vector(0, 0, 0);
 }
 
+void Vector::normilaze()
+{
+    
+}
+
 

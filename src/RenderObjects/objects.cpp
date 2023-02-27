@@ -60,3 +60,35 @@ Vector Plane::getColor(double pX, double pY, double pZ)
 {
     return Vector(0.5, 0.5, 0.5);
 };
+
+//////////////////////////////////////////////////////////////////////////////////
+
+Torus::Torus(Vector position, double radiusSamll, double radiusLarge)
+{
+    this->x = position.x;
+    this->y = position.y;
+    this->z = position.z;
+    this->radiusSamll = radiusSamll;
+    this->radiusLarge = radiusLarge;
+};
+
+Torus::Torus(double x, double y, double z, double radiusSamll, double radiusLarge)
+{
+    this->x = x;
+    this->y = y;
+    this->z = z;
+    this->radiusSamll = radiusSamll;
+    this->radiusLarge = radiusLarge;
+};
+
+double Torus::getDist(double pX, double pY, double pZ)
+{
+    double centerDist = sqrt(pX * pX + pZ * pZ) - radiusLarge;
+    double distanceToTorus = sqrt(centerDist * centerDist + pY * pY) - radiusSamll;
+    return distanceToTorus;
+};
+
+Vector Torus::getColor(double pX, double pY, double pZ)
+{
+    return Vector(255, 215, 0);
+};
