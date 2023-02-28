@@ -10,17 +10,14 @@ Vector::Vector(double x, double y, double z)
 
 void Vector::sub(Vector other)
 {
-
+    x += other.x;
+    y += other.y;
+    z += other.z;
 };
 
 Vector Vector::subNew(Vector other)
 {
-    return Vector();
-};
-
-void Vector::rotate(double dx, double dy, double dz)
-{
-
+    return Vector(x + other.x, y + other.y, z + other.z);
 };
 
 double Vector::lenght()
@@ -30,17 +27,27 @@ double Vector::lenght()
 
 void Vector::mult(double n)
 {
-    
+    x *= n;
+    y *= n;
+    z *= n;
 } 
 
 Vector Vector::multNew(double n)
 {
-    return Vector(0, 0, 0);
+    return Vector(x * n, y * n, z * n);
 }
 
-void Vector::normilaze()
+void Vector::normalize()
 {
-    
+    double len = this->lenght();
+    x /= len;
+    y /= len;
+    z /= len;
+}
+
+double Vector::dot(Vector other)
+{
+    return x*other.x + y*other.y + z*other.z;
 }
 
 

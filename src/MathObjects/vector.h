@@ -24,7 +24,9 @@ public:
 
     double getAngle(int axis); // вернуть угол в радианах относительно оси axis
 
-    void normilaze(); // нормализовать
+    void normalize(); // нормализовать
+
+    double dot(Vector other);
 
     void mult(double n); // умножить на n 
 

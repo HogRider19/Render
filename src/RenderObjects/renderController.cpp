@@ -10,7 +10,7 @@ Camera::Camera(Vector position, Vector direction, CameraConfig conf)
 
 void Camera::rotate(Vector rotationAngles)
 {
-    direction.rotate(rotationAngles.x, rotationAngles.y, rotationAngles.x);
+    //direction.rotate(rotationAngles.x, rotationAngles.y, rotationAngles.x);
 }
 
 void Camera::move(Vector newPosition)
@@ -80,7 +80,7 @@ RayMarchingStepResult RenderController::rayMarchingStep(Ray ray)
         index++;
     });
     
-    ray.direction.normilaze();
+    ray.direction.normalize();
     Vector displace = ray.direction.multNew(minimalDist);
     Vector newPosition = ray.position.subNew(displace);
     Ray rayMarchingRay = Ray(newPosition, ray.direction);

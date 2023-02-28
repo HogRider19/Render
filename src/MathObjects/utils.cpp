@@ -3,5 +3,8 @@
 
 Vector convertPlaneCoordToGlobal(double x, double y, Vector planeNormal, Vector planePoint)
 {
-    return Vector(0, 0, 0);
+    planeNormal.normalize();
+    Vector planePointToCurrent = Vector(x, y, 0).subNew(planePoint.multNew(-1));
+    double distAlongNormal = planePointToCurrent.dot(planeNormal);
+    return planePoint.subNew(planeNormal.multNew(distAlongNormal));
 }
