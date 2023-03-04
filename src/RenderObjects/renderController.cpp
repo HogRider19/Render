@@ -57,8 +57,11 @@ Vector RenderController::rayMarching(Ray ray)
             std::advance(it, nearestObjectindex);
             BaseObjectInterface* crossObject = *it;
 
+            double lightRatio = 1 - double(stepCount/config.maxIterationRayMarch);
             Vector cressPoint = rayMarchingRay.position;
-            return crossObject->getColor(cressPoint.x, cressPoint.y, cressPoint.z);
+            Vector color = crossObject->getColor(cressPoint.x, cressPoint.y, cressPoint.z);
+            color.mult(lightRatio);
+            return color;
         }
     }
     return Vector(0, 0, 0);
@@ -113,7 +116,7 @@ void RenderController::frameRender(sf::RenderWindow& window)
         for(double y=-planeLengthY/2; y<planeLengthY/2; y = y + pixelSizeY)
         {
             //Vector point = convertPlaneCoordToGlobal(x, y, camera.direction, planePoint);
-            Vector point = Vector(x*pixelSizeX, y*pixelSizeY, cnf.projectionPlaneDistance);
+            Vector point = Vector(x, y, cnf.projectionPlaneDistance);
             Vector renderRayDirection = camera.position.subNew(point.multNew(-1));
             Ray renderRay = Ray(camera.position, renderRayDirection);
 
@@ -124,13 +127,12 @@ void RenderController::frameRender(sf::RenderWindow& window)
 
             //printf("%f %f %f\n", pixelCollor.x, pixelCollor.y, pixelCollor.z);
 
-            sf::RectangleShape pixel (sf::Vector2f(config.WinWidth / cnf.resolutionX * 2,
-                                                 config.WinHeight / cnf.resolutionY *2));
+            sf::RectangleShape pixel (sf::Vector2f(double(config.WinWidth) / double(cnf.resolutionX) * 2,
+                                                 double(config.WinHeight) / double(cnf.resolutionY) *2));
+
             pixel.setFillColor(sf::Color(pixelCollor.x, pixelCollor.y, pixelCollor.z));
             pixel.setPosition(x * config.WinWidth + config.WinWidth/2,
                                  y * config.WinHeight + config.WinHeight/2);
-
-            //printf("%f %f\n", pixelSizeX, pixelSizeY);
 
             window.draw(pixel);
         }

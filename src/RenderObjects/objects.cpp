@@ -28,7 +28,10 @@ double Sphere::getDist(double pX, double pY, double pZ)
 
 Vector Sphere::getColor(double pX, double pY, double pZ)
 {
-    return Vector(0, 0, 1);
+    double c = fabs(z - pZ) / radius / 2;
+    if (c > 1)c = 1;
+    if (c < 0)c = 0;
+    return Vector(c, c, 1);
 };
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -51,14 +54,17 @@ Plane::Plane(Vector position, Vector normal)
 
 double Plane::getDist(double pX, double pY, double pZ)
 {
-    double cartesianProduct = fabs(normal.x * pX + normal.y * pY + normal.z * pZ);
+    double cartesianProduct = fabs(normal.x * pX + normal.y * pY + normal.z * pZ 
+                                    - (x * normal.x + y * normal.y + z * normal.z));
     double distanceToPlane = cartesianProduct / normal.lenght();
     return distanceToPlane;
 };
 
 Vector Plane::getColor(double pX, double pY, double pZ)
-{
-    return Vector(0.5, 0.5, 0.5);
+{;
+    double c1 = fabs(15 + pZ) / 15;
+    double c2 = fabs(pX) / 15;
+    return Vector(c2, 0.5, c1);
 };
 
 //////////////////////////////////////////////////////////////////////////////////
