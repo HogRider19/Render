@@ -1,10 +1,10 @@
 #pragma once
 #include <stdio.h>
 #include <list>
+#include "math.h"
 #include <SFML/Graphics.hpp>
 #include "objects.h"
 #include "../MathObjects/utils.h"
-#include "math.h"
 
 
 struct CameraConfig

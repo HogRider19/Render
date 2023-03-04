@@ -13,14 +13,14 @@ int main()
     RenderConfig renderConfig;
     renderConfig.WinWidth = 800;
     renderConfig.WinHeight = 800;
-    renderConfig.maxIterationRayMarch = 30;
+    renderConfig.maxIterationRayMarch = 10;
     renderConfig.displayAccuracy = 0.1;
     renderConfig.visibilityRange = 30.0;
 
-    Camera camera = Camera(Vector(0, 0, 0), Vector(1, 0, 0), cameraConfig);
+    Camera camera = Camera(Vector(0, 0, 0), Vector(0, 1, 0), cameraConfig);
     RenderController controller = RenderController(camera, renderConfig);
 
-    Sphere sph = Sphere(0, 0, 0, 2);
+    Sphere sph = Sphere(0, 0, -100, 1);
     BaseObjectInterface &obj = sph;
     controller.addObject(obj);
 

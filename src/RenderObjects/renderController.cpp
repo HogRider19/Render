@@ -50,6 +50,9 @@ Vector RenderController::rayMarching(Ray ray)
 
         if(minimalDist < config.displayAccuracy)
         {
+
+            //printf("%f\n", minimalDist);
+
             std::list<BaseObjectInterface*>::iterator it = objects.begin();
             std::advance(it, nearestObjectindex);
             BaseObjectInterface* crossObject = *it;
@@ -77,6 +80,7 @@ RayMarchingStepResult RenderController::rayMarchingStep(Ray ray)
             nearestObjectIndex = index;
             minimalDist = dist;
         }
+
         index++;
     });
     
@@ -108,16 +112,25 @@ void RenderController::frameRender(sf::RenderWindow& window)
     {
         for(double y=-planeLengthY/2; y<planeLengthY/2; y = y + pixelSizeY)
         {
-            Vector point = convertPlaneCoordToGlobal(x, y, camera.direction, planePoint);
+            //Vector point = convertPlaneCoordToGlobal(x, y, camera.direction, planePoint);
+            Vector point = Vector(x*pixelSizeX, y*pixelSizeY, cnf.projectionPlaneDistance);
             Vector renderRayDirection = camera.position.subNew(point.multNew(-1));
             Ray renderRay = Ray(camera.position, renderRayDirection);
+
+            //printf("%f %f %f\n", point.x, point.y, point.z);
 
             Vector pixelCollor = rayMarching(renderRay);
             pixelCollor.mult(255);
 
-            sf::RectangleShape pixel (sf::Vector2f(pixelSizeX, pixelSizeY));
+            //printf("%f %f %f\n", pixelCollor.x, pixelCollor.y, pixelCollor.z);
+
+            sf::RectangleShape pixel (sf::Vector2f(config.WinWidth / cnf.resolutionX * 2,
+                                                 config.WinHeight / cnf.resolutionY *2));
             pixel.setFillColor(sf::Color(pixelCollor.x, pixelCollor.y, pixelCollor.z));
-            pixel.setPosition(x, y);
+            pixel.setPosition(x * config.WinWidth + config.WinWidth/2,
+                                 y * config.WinHeight + config.WinHeight/2);
+
+            //printf("%f %f\n", pixelSizeX, pixelSizeY);
 
             window.draw(pixel);
         }
@@ -138,10 +151,11 @@ void RenderController::run()
 {
     sf::RenderWindow window(sf::VideoMode(config.WinWidth, config.WinHeight), "Render!");
 
+    frameRender(window);
+    window.display();
+
     while (window.isOpen())
     {
-        frameRender(window);
         handleEvents(window);
-        window.display();
     }
 };
