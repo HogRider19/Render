@@ -51,9 +51,10 @@ public:
 
     double x, y, z;
     double radiusSamll, radiusLarge;
+    Vector normal;
 
-    Torus(Vector position, double radiusSamll, double radiusLarge);
-    Torus(double x, double y, double z, double radiusSamll, double radiusLarge);
+    Torus(Vector position, double radiusSamll, double radiusLarge, Vector normal);
+    Torus(double x, double y, double z, double radiusSamll, double radiusLarge,  Vector normal);
 
     virtual double getDist(double pX, double pY, double pZ) override;
 

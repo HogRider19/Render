@@ -69,22 +69,24 @@ Vector Plane::getColor(double pX, double pY, double pZ)
 
 //////////////////////////////////////////////////////////////////////////////////
 
-Torus::Torus(Vector position, double radiusSamll, double radiusLarge)
+Torus::Torus(Vector position, double radiusSamll, double radiusLarge, Vector normal)
 {
     this->x = position.x;
     this->y = position.y;
     this->z = position.z;
     this->radiusSamll = radiusSamll;
     this->radiusLarge = radiusLarge;
+    this->normal = normal;
 };
 
-Torus::Torus(double x, double y, double z, double radiusSamll, double radiusLarge)
+Torus::Torus(double x, double y, double z, double radiusSamll, double radiusLarge, Vector normal)
 {
     this->x = x;
     this->y = y;
     this->z = z;
     this->radiusSamll = radiusSamll;
     this->radiusLarge = radiusLarge;
+    this->normal = normal;
 };
 
 double Torus::getDist(double pX, double pY, double pZ)

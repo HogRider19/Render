@@ -57,11 +57,12 @@ Vector RenderController::rayMarching(Ray ray)
             std::advance(it, nearestObjectindex);
             BaseObjectInterface* crossObject = *it;
 
-            double lightRatio = 1 - double(stepCount/config.maxIterationRayMarch);
+            double lightRatio = 1 - double(stepCount)/double(config.maxIterationRayMarch);
             Vector cressPoint = rayMarchingRay.position;
             Vector color = crossObject->getColor(cressPoint.x, cressPoint.y, cressPoint.z);
             color.mult(lightRatio);
             return color;
+            //return Vector(lightRatio, lightRatio, lightRatio);
         }
     }
     return Vector(0, 0, 0);

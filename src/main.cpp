@@ -1,7 +1,7 @@
 
 #include "RenderObjects/renderController.h"
 
-int main()
+void scene1()
 {
     CameraConfig cameraConfig;
     cameraConfig.resolutionX = 100;
@@ -13,8 +13,8 @@ int main()
     RenderConfig renderConfig;
     renderConfig.WinWidth = 800;
     renderConfig.WinHeight = 800;
-    renderConfig.maxIterationRayMarch = 100;
-    renderConfig.displayAccuracy = 0.08;
+    renderConfig.maxIterationRayMarch = 50;
+    renderConfig.displayAccuracy = 0.1;
     renderConfig.visibilityRange = 30.0;
 
     Camera camera = Camera(Vector(0, 0, 0), Vector(0, 1, 0), cameraConfig);
@@ -28,11 +28,17 @@ int main()
     BaseObjectInterface &obj2 = s;
     controller.addObject(obj2);
 
-    Sphere s2 = Sphere(2, 0, -6, 1);
+    Sphere s2 = Sphere(1.5, -1, -6, 1);
     BaseObjectInterface &obj3 = s2;
     controller.addObject(obj3);
 
-    controller.run();
+    controller.run();  
+}
+
+int main()
+{
+    scene1();
 
     return 0;
 }
+
