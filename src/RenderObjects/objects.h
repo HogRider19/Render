@@ -60,3 +60,16 @@ public:
 
     virtual Vector getColor(double pX, double pY, double pZ) override;
 };
+
+class Mandelbrot : public BaseObjectInterface
+{
+public:
+
+    double x, y, z;
+
+    Mandelbrot(double x, double y, double z);
+
+    virtual double getDist(double pX, double pY, double pZ) override;
+
+    virtual Vector getColor(double pX, double pY, double pZ) override;
+};
