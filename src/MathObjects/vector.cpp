@@ -1,53 +1,36 @@
 #include "vector.h"
 
 
-Vector::Vector(double x, double y, double z)
+void vec3::sub(double x1, double y1, double z1, double x2, double y2, double z2, Vector &buf)
 {
-    this->x = x;
-    this->y = y;
-    this->z = z;
+    buf.x = x1 + x2;
+    buf.y = y1 + y2;
+    buf.z = z1 + z2;
 };
 
-void Vector::sub(Vector other)
+void vec3::mult(double x, double y, double z, double n, Vector &buf)
 {
-    x += other.x;
-    y += other.y;
-    z += other.z;
+    buf.x = x * n;
+    buf.y = y * n;
+    buf.z = z * n;
 };
 
-Vector Vector::subNew(Vector other)
+void vec3::normalize(double x, double y, double z, Vector &buf)
 {
-    return Vector(x + other.x, y + other.y, z + other.z);
+    double len = length(x, y, z);
+    buf.x = x / len;
+    buf.y = y / len;
+    buf.z = z / len;
 };
 
-double Vector::lenght()
+double vec3::length(double x, double y, double z)
 {
-    return sqrt(x * x + y * y + z * z);
-}
+    return sqrt(x*x + y*y + z*z);
+};
 
-void Vector::mult(double n)
+double vec3::dot(double x1, double y1, double z1, double x2, double y2, double z2)
 {
-    x *= n;
-    y *= n;
-    z *= n;
-} 
-
-Vector Vector::multNew(double n)
-{
-    return Vector(x * n, y * n, z * n);
-}
-
-void Vector::normalize()
-{
-    double len = this->lenght();
-    x /= len;
-    y /= len;
-    z /= len;
-}
-
-double Vector::dot(Vector other)
-{
-    return x*other.x + y*other.y + z*other.z;
-}
+    return x1*x2 + y1*y2 + z1*z2;
+};
 
 
