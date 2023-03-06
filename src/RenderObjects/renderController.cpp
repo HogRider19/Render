@@ -1,24 +1,24 @@
 #include "renderController.h"
 
 
-Camera::Camera(Vector position, Vector direction, CameraConfig conf)
+Camera::Camera(vec3::Vector position, vec3::Vector direction, CameraConfig conf)
 {
     this->position = position;
     this->direction = direction;
     this->config = conf;
 };
 
-void Camera::rotate(Vector rotationAngles)
+void Camera::rotate(vec3::Vector rotationAngles)
 {
     //direction.rotate(rotationAngles.x, rotationAngles.y, rotationAngles.x);
 }
 
-void Camera::move(Vector newPosition)
+void Camera::move(vec3::Vector newPosition)
 {
-    position.sub(newPosition);
+    //position.sub(newPosition);
 };
 
-void Camera::moveTo(Vector newPosition)
+void Camera::moveTo(vec3::Vector newPosition)
 {
     position = newPosition;
 };
@@ -34,7 +34,7 @@ void RenderController::addObject(BaseObjectInterface &obj)
     objects.push_front(&obj);
 }
 
-Vector RenderController::rayMarching(Ray ray)
+void RenderController::rayMarching(vec3::Vector rayPoint, vec3::Vector rayDir, vec3::Vector &buf)
 { 
 
     Ray rayMarchingRay = ray;
@@ -111,22 +111,42 @@ void RenderController::frameRender(sf::RenderWindow& window)
     double planeLengthY = 2 * cnf.projectionPlaneDistance * sin(cnf.viewingAngleY / 2);
     double pixelSizeX = planeLengthX / cnf.resolutionX;
     double pixelSizeY = planeLengthY / cnf.resolutionY;
-    Vector planePoint = camera.position.subNew(camera.direction);
+    vec3::Vector planePoint; vec3::sub(
+        camera.position.x,
+        camera.position.y,
+        camera.position.z,
+        camera.direction.x,
+        camera.direction.y,
+        camera.direction.z,
+        planePoint
+    );
+
+    vec3::Vector point;
+    vec3::Vector rrd;
+    vec3::Vector pixelCollor;
+    vec3::Vector CameraPos = camera.position;
+
     for(double x=-planeLengthX/2; x<planeLengthX/2; x = x + pixelSizeX)
     {
         for(double y=-planeLengthY/2; y<planeLengthY/2; y = y + pixelSizeY)
         {
-            //Vector point = convertPlaneCoordToGlobal(x, y, camera.direction, planePoint);
-            Vector point = Vector(x, y, cnf.projectionPlaneDistance);
-            Vector renderRayDirection = camera.position.subNew(point.multNew(-1));
-            Ray renderRay = Ray(camera.position, renderRayDirection);
+            point.x = x, point.y = y, point.z = cnf.projectionPlaneDistance;
+            vec3::mult(point.x, point.y, point.z, -1, point);
+            vec3::sub(
+                camera.position.x,
+                camera.position.y,
+                camera.position.z,
+                point.x, point.y,
+                point.z, rrd
+            );
 
-            //printf("%f %f %f\n", point.x, point.y, point.z);
-
-            Vector pixelCollor = rayMarching(renderRay);
-            pixelCollor.mult(255);
-
-            //printf("%f %f %f\n", pixelCollor.x, pixelCollor.y, pixelCollor.z);
+            rayMarching(camera.position, rrd, pixelCollor);
+            vec3::mult(
+                pixelCollor.x,
+                pixelCollor.y,
+                pixelCollor.z,
+                255, pixelCollor
+            );
 
             sf::RectangleShape pixel (sf::Vector2f(double(config.WinWidth) / double(cnf.resolutionX) * 2,
                                                  double(config.WinHeight) / double(cnf.resolutionY) *2));

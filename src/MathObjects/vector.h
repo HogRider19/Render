@@ -5,21 +5,14 @@
 
 namespace vec3
 {
-    struct Vector
-    {
-        double x;
-        double y;
-        double z;
-    };
+    double length(double (&vec)[3]);
 
-    double length(double x, double y, double z);
+    double dot(double (&vec1)[3], double (&vec2)[3]);
 
-    double dot(double x1, double y1, double z1, double x2, double y2, double z2);
+    double* mult(double (&vec)[3], double n);
 
-    void mult(double x, double y, double z, double n, Vector &buf);
+    double* sub(double (&vec1)[3], double (&vec2)[3]);
 
-    void sub(double x1, double y1, double z1, double x2, double y2, double z2, Vector &buf);
-
-    void normalize(double x, double y, double z, Vector &buf);
+    double* normalize(double (&vec)[3]);
 };
 

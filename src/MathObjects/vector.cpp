@@ -1,36 +1,42 @@
 #include "vector.h"
 
 
-void vec3::sub(double x1, double y1, double z1, double x2, double y2, double z2, Vector &buf)
+double* vec3::sub(double (&vec1)[3], double (&vec2)[3])
 {
-    buf.x = x1 + x2;
-    buf.y = y1 + y2;
-    buf.z = z1 + z2;
+    double res[3];
+    res[0] = vec1[0] + vec2[0];
+    res[1] = vec1[1] + vec2[1];
+    res[2] = vec1[2] + vec2[2];
+    return res;
 };
 
-void vec3::mult(double x, double y, double z, double n, Vector &buf)
+double* vec3::mult(double (&vec)[3], double n)
 {
-    buf.x = x * n;
-    buf.y = y * n;
-    buf.z = z * n;
+    double res[3];
+    res[0] = vec[0] * n;
+    res[1] = vec[1] * n;
+    res[2] = vec[2] * n;
+    return res;
 };
 
-void vec3::normalize(double x, double y, double z, Vector &buf)
+double* vec3::normalize(double (&vec)[3])
 {
-    double len = length(x, y, z);
-    buf.x = x / len;
-    buf.y = y / len;
-    buf.z = z / len;
+    double res[3];
+    double len = length(vec);
+    res[0] = vec[0] / len;
+    res[1] = vec[1] / len;
+    res[2] = vec[2] / len;
+    return res;
 };
 
-double vec3::length(double x, double y, double z)
+double vec3::length(double (&vec)[3])
 {
-    return sqrt(x*x + y*y + z*z);
+    return sqrt(vec[0]*vec[0] + vec[1]*vec[1] + vec[2]*vec[2]);
 };
 
-double vec3::dot(double x1, double y1, double z1, double x2, double y2, double z2)
+double vec3::dot(double (&vec1)[3], double (&vec2)[3])
 {
-    return x1*x2 + y1*y2 + z1*z2;
+    return vec1[0]*vec2[0] + vec1[1]*vec2[1] + vec1[2]*vec2[2];
 };
 
 

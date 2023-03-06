@@ -35,18 +35,18 @@ struct RayMarchingStepResult
 class Camera
 {
 public:
-    Vector position;
-    Vector direction;
+    vec3::Vector position;
+    vec3::Vector direction;
     CameraConfig config;
 
     Camera(){};
-    Camera(Vector position, Vector direction, CameraConfig conf);
+    Camera(vec3::Vector position, vec3::Vector direction, CameraConfig conf);
 
-    void move(Vector delta);
+    void move(vec3::Vector delta);
 
-    void moveTo(Vector newPosition);
+    void moveTo(vec3::Vector newPosition);
 
-    void rotate(Vector rotationAngles);
+    void rotate(vec3::Vector rotationAngles);
 };
 
 class RenderController
@@ -69,7 +69,7 @@ private:
 
     void handleEvents(sf::RenderWindow& window);
 
-    Vector rayMarching(Ray ray);
+    void rayMarching(vec3::Vector rayPoint, vec3::Vector rayDir, vec3::Vector &buf);
 
     RayMarchingStepResult rayMarchingStep(Ray ray);
 };
