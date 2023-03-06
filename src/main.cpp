@@ -4,8 +4,8 @@
 void scene1()
 {
     CameraConfig cameraConfig;
-    cameraConfig.resolutionX = 100;
-    cameraConfig.resolutionY = 100;
+    cameraConfig.resolutionX = 800;
+    cameraConfig.resolutionY = 800;
     cameraConfig.viewingAngleX = 3.14;
     cameraConfig.viewingAngleY = 3.14;
     cameraConfig.projectionPlaneDistance = 1.0;
@@ -14,17 +14,18 @@ void scene1()
     renderConfig.WinWidth = 800;
     renderConfig.WinHeight = 800;
     renderConfig.maxIterationRayMarch = 50;
-    renderConfig.displayAccuracy = 0.1;
+    renderConfig.displayAccuracy = 0.000;
     renderConfig.visibilityRange = 30.0;
 
     Camera camera = Camera(Vector(0, 0, 0), Vector(0, 1, 0), cameraConfig);
     RenderController controller = RenderController(camera, renderConfig);
 
-    Plane p = Plane(Vector(0, -1.5, 0), Vector(0, 1, 0));;
+    Mandelbrot p = Mandelbrot(0, 0, 2);
     BaseObjectInterface &obj1 = p;
     controller.addObject(obj1);
 
-    Sphere s = Sphere(0, 0, -14, 3);
+/*
+    Sphere s = Sphere(0, 0, -14, 2);
     BaseObjectInterface &obj2 = s;
     controller.addObject(obj2);
 
@@ -32,8 +33,13 @@ void scene1()
     BaseObjectInterface &obj3 = s2;
     controller.addObject(obj3);
 
+    Sphere s3 = Sphere(-3, 3, -16, 3);
+    BaseObjectInterface &obj4 = s3;
+    controller.addObject(obj4);
+*/
     controller.run();  
 }
+
 
 int main()
 {

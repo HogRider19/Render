@@ -21,6 +21,7 @@ Sphere::Sphere(double x, double y, double z, double radius)
 
 double Sphere::getDist(double pX, double pY, double pZ)
 {
+    //pY = float((int(pY) % 5 + 5) % 5);
     double pointToCenterDistance = sqrt(pow(pX - x, 2)+ pow(pY - y, 2) + pow(pZ - z, 2));
     double distanceToSphereSurface = pointToCenterDistance - this->radius;
     return distanceToSphereSurface;
@@ -91,12 +92,59 @@ Torus::Torus(double x, double y, double z, double radiusSamll, double radiusLarg
 
 double Torus::getDist(double pX, double pY, double pZ)
 {
-    double centerDist = sqrt(pX * pX + pZ * pZ) - radiusLarge;
-    double distanceToTorus = sqrt(centerDist * centerDist + pY * pY) - radiusSamll;
-    return distanceToTorus;
+    Vector v = Vector(pX - x, 0, pZ - z);
+    Vector q = Vector(v.lenght() - radiusSamll, pY, 0);
+    return q.lenght() - radiusLarge;
 };
 
 Vector Torus::getColor(double pX, double pY, double pZ)
+{
+    return Vector(255, 215, 0);
+};
+
+//////////////////////////////////////////////////////////////////////////////////
+
+Mandelbrot::Mandelbrot(double x, double y, double z)
+{
+    this->x = x;
+    this->y = y;
+    this->z = z;
+};
+
+double Mandelbrot::getDist(double pX, double pY, double pZ)
+{
+    pX = pX + x;
+    pY = pY + y;
+    pZ = pZ + z;
+    Vector zn = Vector(pX, pY, pZ);
+    double hit = 0.0;
+    double r = 8.0;
+    double d = 2.0;
+    for(int i=0; i<8; i++)
+    {
+        double rad = zn.lenght();
+        if(rad > 2)
+        {
+            hit = 0.5 * log(rad) * rad / d;
+        } 
+        else
+        {
+            double th = atan(Vector(zn.x, zn.y, 0).lenght() / zn.z);
+            double phi = atan2(zn.y, zn.x);
+            double rado = pow(rad, 8.0);
+            d = pow(rad, 7.0) * 7.0 * d + 1.0;
+            double sint = sin(th * r);
+            double zn0 = rado * sint * cos(phi * r);
+            double zn1 = rado * sint * sin(phi * r);
+            double zn2 = rado * cos(th * r);
+            zn = Vector(zn0, zn1, zn2);
+            zn.sub(Vector(pX, pY, pZ));
+        }
+    }
+    return hit;
+};
+
+Vector Mandelbrot::getColor(double pX, double pY, double pZ)
 {
     return Vector(255, 215, 0);
 };
