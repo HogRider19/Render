@@ -9,7 +9,7 @@ class BaseObjectInterface
 {
 public:
     virtual double getDist(double pX, double pY, double pZ) = 0;
-    virtual Vector getColor(double pX, double pY, double pZ) = 0;
+    virtual void getColor(double pX, double pY, double pZ, vec3::Vector &buf) = 0;
 };
 
 
@@ -20,12 +20,11 @@ public:
     double x, y, z;
     double radius;
 
-    Sphere(Vector position, double radius);
     Sphere(double x, double y, double z, double radius);
 
     virtual double getDist(double pX, double pY, double pZ) override;
 
-    virtual Vector getColor(double pX, double pY, double pZ) override;
+    virtual void getColor(double pX, double pY, double pZ, vec3::Vector &buf) override;
 };
 
 
@@ -34,14 +33,13 @@ class Plane : public BaseObjectInterface
 public:
 
     double x, y, z;
-    Vector normal;
+    vec3::Vector normal;
 
-    Plane(Vector position, Vector normal);
-    Plane(double x, double y, double z, Vector normal);
+    Plane(double x, double y, double z, vec3::Vector normal);
 
     virtual double getDist(double pX, double pY, double pZ) override;
 
-    virtual Vector getColor(double pX, double pY, double pZ) override;
+    virtual void getColor(double pX, double pY, double pZ, vec3::Vector &buf) override;
 };
 
 
@@ -51,14 +49,13 @@ public:
 
     double x, y, z;
     double radiusSamll, radiusLarge;
-    Vector normal;
+    vec3::Vector normal;
 
-    Torus(Vector position, double radiusSamll, double radiusLarge, Vector normal);
-    Torus(double x, double y, double z, double radiusSamll, double radiusLarge,  Vector normal);
+    Torus(double x, double y, double z, double radiusSamll, double radiusLarge, vec3::Vector normal);
 
     virtual double getDist(double pX, double pY, double pZ) override;
 
-    virtual Vector getColor(double pX, double pY, double pZ) override;
+    virtual void getColor(double pX, double pY, double pZ, vec3::Vector &buf) override;
 };
 
 class Mandelbrot : public BaseObjectInterface
@@ -71,5 +68,5 @@ public:
 
     virtual double getDist(double pX, double pY, double pZ) override;
 
-    virtual Vector getColor(double pX, double pY, double pZ) override;
+    virtual void getColor(double pX, double pY, double pZ, vec3::Vector &buf) override;
 };
